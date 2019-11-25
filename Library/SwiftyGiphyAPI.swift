@@ -20,7 +20,7 @@ fileprivate typealias GiphyAPIResponseBlock = (_ error: NSError?, _ response: [S
 
 fileprivate let kGiphyUnknownResponseError = NSLocalizedString("The server returned an unknown response.", comment: "The error message shown when the server produces something unintelligible.")
 
-fileprivate let kGiphyDefaultAPIBase = URL(string: "https://api.giphy.com/v1/gifs/")!
+fileprivate let kGiphyDefaultAPIBase = URL(string: "https://api.giphy.com/v1/stickers/")!
 fileprivate let kGiphyDefaultStickerAPIBase = URL(string: "https://api.giphy.com/v1/stickers/")!
 
 public enum SwiftyGiphyAPIContentRating: String {
