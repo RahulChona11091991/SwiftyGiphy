@@ -86,6 +86,8 @@ class SwiftyGiphyCollectionViewCell: UICollectionViewCell {
         imageView.sd_cacheFLAnimatedImage = false
         imageView.sd_setShowActivityIndicatorView(true)
         imageView.sd_setIndicatorStyle(.gray)
-        imageView.sd_setImage(with: imageSet.url)
+        imageView.sd_setImage(with: imageSet.url) { [weak self] (image, _, _, url) in
+            self?.imageView.image = image
+        }
     }
 }
