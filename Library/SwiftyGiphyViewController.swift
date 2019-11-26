@@ -13,7 +13,7 @@ import NSTimer_Blocks
 
 public protocol SwiftyGiphyViewControllerDelegate: class {
 
-    func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem)
+    func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem, stickerImage: UIImage?)
     func giphyControllerDidCancel(controller: SwiftyGiphyViewController)
 }
 
@@ -401,7 +401,9 @@ extension SwiftyGiphyViewController: UICollectionViewDelegate {
         let selectedGif = currentGifs![indexPath.row]
 
         searchController.isActive = false
-        delegate?.giphyControllerDidSelectGif(controller: self, item: selectedGif)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! SwiftyGiphyCollectionViewCell
+        delegate?.giphyControllerDidSelectGif(controller: self, item: selectedGif, stickerImage: cell.imageView.image)
     }
 }
 
