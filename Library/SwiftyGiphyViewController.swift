@@ -396,14 +396,15 @@ extension SwiftyGiphyViewController: UICollectionViewDataSource {
 extension SwiftyGiphyViewController: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let cell = collectionView.cellForItem(at: indexPath) as! SwiftyGiphyCollectionViewCell
+        let selectedImage = cell.imageView.image
+        
         collectionView.deselectItem(at: indexPath, animated: false)
 
         let selectedGif = currentGifs![indexPath.row]
 
         searchController.isActive = false
-        
-        let cell = collectionView.cellForItem(at: indexPath) as! SwiftyGiphyCollectionViewCell
-        delegate?.giphyControllerDidSelectGif(controller: self, item: selectedGif, stickerImage: cell.imageView.image)
+        delegate?.giphyControllerDidSelectGif(controller: self, item: selectedGif, stickerImage: selectedImage)
     }
 }
 
