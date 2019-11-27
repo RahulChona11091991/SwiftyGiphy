@@ -12,7 +12,7 @@ import SDWebImage
 
 class SwiftyGiphyCollectionViewCell: UICollectionViewCell {
     
-    fileprivate(set) var imageView: FLAnimatedImageView = FLAnimatedImageView()
+    fileprivate(set) var imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,12 +30,12 @@ class SwiftyGiphyCollectionViewCell: UICollectionViewCell {
         
         let backgroundRoundedCornerView = RoundedCornerView()
         backgroundRoundedCornerView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundRoundedCornerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        backgroundRoundedCornerView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         backgroundRoundedCornerView.clipsToBounds = true
         
         let foregroundRoundedCornerView = RoundedCornerView()
         foregroundRoundedCornerView.translatesAutoresizingMaskIntoConstraints = false
-        foregroundRoundedCornerView.backgroundColor = UIColor.lightGray
+        foregroundRoundedCornerView.backgroundColor = UIColor.white
         foregroundRoundedCornerView.clipsToBounds = true
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,6 @@ class SwiftyGiphyCollectionViewCell: UICollectionViewCell {
         imageView.sd_cancelCurrentAnimationImagesLoad()
         imageView.sd_cancelCurrentImageLoad()
         imageView.sd_setImage(with: nil)
-        imageView.animatedImage = nil
         imageView.image = nil
     
     }
@@ -83,9 +82,10 @@ class SwiftyGiphyCollectionViewCell: UICollectionViewCell {
     /// - Parameter imageSet: The imageset to configure the cell with
     func configureFor(imageSet: GiphyImageSet)
     {
-        imageView.sd_cacheFLAnimatedImage = false
         imageView.sd_setShowActivityIndicatorView(true)
         imageView.sd_setIndicatorStyle(.gray)
-        imageView.sd_setImage(with: imageSet.url)
+        imageView.sd_setImage(with: imageSet.url) { [weak self] (image, _, _, url) in
+            self?.imageView.image = image
+        }
     }
 }
